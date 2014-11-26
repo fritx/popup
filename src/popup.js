@@ -28,7 +28,7 @@ $(function(){
   $('body').append(markup)
 })
 
-var defaults = {
+var _defaults = {
   icon: null,
   image: null,
   okBtn: 'OK',
@@ -37,10 +37,15 @@ var defaults = {
   hasCancel: false,
   timeout: null
 }
+popup.defaults = defaults
 window.popup = popup
 
+function defaults(settings){
+  $.extend(_defaults, settings)
+}
+
 function popup(options, callback){
-  var opt = $.extend({}, defaults, options)
+  var opt = $.extend({}, _defaults, options)
   if (options.cancelBtn) { // options.cancelBtn
     opt.hasCancel = true
   }

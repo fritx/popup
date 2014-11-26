@@ -16,6 +16,15 @@
   })
 
   function main(){
+    popup.defaults({
+      icon: null,
+      image: null,
+      okBtn: 'OK',
+      cancelBtn: 'Cancel',
+      hasOK: true,
+      hasCancel: false,
+      timeout: null
+    })
     popup({
       icon: 'warn',
       title: 'Are you sure?',
