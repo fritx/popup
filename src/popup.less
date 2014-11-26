@@ -1,0 +1,301 @@
+// vendors mixin
+.border-radius(@r) {
+  -webkit-border-radius: @arguments;
+     -moz-border-radius: @arguments;
+      -ms-border-radius: @arguments;
+       -o-border-radius: @arguments;
+          border-radius: @arguments;
+}
+.box-shadow(@s, @s1:'') {
+  -webkit-box-shadow: @arguments;
+     -moz-box-shadow: @arguments;
+      -ms-box-shadow: @arguments;
+       -o-box-shadow: @arguments;
+          box-shadow: @arguments;
+}
+.transform(@s) {
+  -webkit-transform: @arguments;
+     -moz-transform: @arguments;
+      -ms-transform: @arguments;
+       -o-transform: @arguments;
+          transform: @arguments;
+}
+.transform-origin(@s) {
+  -webkit-transform-origin: @arguments;
+     -moz-transform-origin: @arguments;
+      -ms-transform-origin: @arguments;
+       -o-transform-origin: @arguments;
+          transform-origin: @arguments;
+}
+
+.popup-overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.popup-alert {
+  @width: 478px;
+  @padding: 17px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-left: -(@width/2 + @padding);
+  margin-top: -200px;
+  z-index: 2000;
+
+  padding: @padding;
+  width: @width;
+  display: none;
+  background-color: white;
+  .border-radius(5px);
+  text-align: center;
+  overflow: hidden;
+
+  @media all and (max-width: 540px) {
+    left: 15px;
+    right: 15px;
+    margin-left: 0;
+    margin-right: 0;
+    width: auto;
+  }
+
+  .icon {
+    @red:     #F27474;
+    @orange:  #F8BB86;
+    @blue:    #C9DAE1;
+    @green:   #A5DC86;
+
+    position: relative;
+    margin: 20px auto;
+    padding: 0;
+    width: 80px;
+    height: 80px;
+    display: none;
+    border: 4px solid gray;
+    border-radius: 50%;
+    box-sizing: content-box;
+
+    &.error {
+      position: relative;
+      display: block;
+      border-color: @red;
+      .line {
+        position: absolute;
+        top: 37px;
+        height: 5px;
+        width: 47px;
+        display: block;
+        border-radius: 2px;
+        background-color: @red;
+        &.left {
+          left: 17px;
+          .transform(rotate(45deg));
+        }
+        &.right {
+          right: 16px;
+          .transform(rotate(-45deg));
+        }
+      }
+    }
+    
+    &.warn {
+      border-color: @orange;
+      .body { // Exclamation mark body
+        position: absolute;
+        left: 50%;
+        top: 10px;
+        margin-left: -2px;
+        width: 5px;
+        height: 47px;
+        border-radius: 2px;
+        background-color: @orange;
+      }
+      .dot { // Exclamation mark dot
+        position: absolute;
+        left: 50%;
+        bottom: 10px;
+        margin-left: -3px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background-color: @orange;
+      }
+    }
+
+    &.info {
+      border-color: @blue;
+      &::before { // i-letter body
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 17px;
+        margin-left: -2px;
+        width: 5px;
+        height: 29px;
+        border-radius: 2px;
+        background-color: @blue;
+      }
+      &::after { // i-letter dot
+        content: "";
+        position: absolute;
+        top: 19px;
+        margin-left: -3px;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background-color: @blue;
+      }
+    }
+
+    &.success {
+      border-color: @green;
+      &::before, &::after { // Emulate moving circular line
+        content: "";
+        position: absolute;
+        width: 60px;
+        height: 120px;
+        .border-radius(50%);
+        .transform(rotate(45deg));
+        background-color: white;
+      }
+      &::before {
+        top: -7px;
+        left: -33px;
+        .border-radius(120px 0 0 120px);
+        .transform(rotate(-45deg));
+        .transform-origin(60px 60px);
+      }
+      &::after {
+        top: -11px;
+        left: 30px;
+        .border-radius(0 120px 120px 0);
+        .transform(rotate(-45deg));
+        .transform-origin(0px 60px);
+      }
+
+      .placeholder { // Ring
+        position: absolute;
+        left: -4px;
+        top: -4px;
+        z-index: 2;
+        width: 80px;
+        height: 80px;
+        border: 4px solid @green;
+        .border-radius(50%);
+        box-sizing: content-box;
+      }
+      .fix {  // Hide corners left from animation
+        position: absolute;
+        left: 28px;
+        top: 8px;
+        z-index: 1;
+        width: 5px;
+        height: 90px;
+        .transform(rotate(-45deg));
+        background-color: white;
+      }
+      .line {
+        position: absolute;
+        z-index: 2;
+        height: 5px;
+        display: block;
+        .border-radius(2px);
+        background-color: @green;
+        &.tip {
+          left: 14px;
+          top: 46px;
+          width: 25px;
+          .transform(rotate(45deg));
+        }
+        &.long {
+          top: 38px;
+          right: 8px;
+          width: 47px;
+          .transform(rotate(-45deg));
+        }
+      }
+    }
+
+    &.custom {
+      background-size: contain;
+      border: none;
+      .border-radius(0);
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+  }
+
+  h2 {
+    position: relative;
+    margin: 25px 0;
+    padding: 0;
+    display: block;
+    color: #575757;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 25px;
+    text-align: center;
+    text-transform: none;
+  }
+
+  p {
+    position: relative;
+    margin: 0 0 23px;
+    padding: 0;
+    color: #797979;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: normal;
+    text-align: center;
+  }
+
+  button {
+    @btnBlue: #AEDEF4;
+    @btnGray: #D0D0D0;
+    margin: 3px 0 5px;
+    padding: 10px 32px;
+
+    border: none;
+    .border-radius(5px);
+    .box-shadow(none);
+    background-color: @btnBlue;
+    cursor: pointer;
+    color: white;
+    font-size: 17px;
+    font-weight: 500;
+    
+    &:focus {
+      outline: none;
+      .box-shadow(0 0 2px rgba(128, 179, 235, 0.5), inset 0 0 0 1px rgba(0, 0, 0, 0.05));
+    }
+    &:hover {
+      background-color: darken(@btnBlue, 3%);
+    }
+    &:active {
+      background-color: darken(@btnBlue, 10%);
+    }
+    &.cancel {
+      background-color: @btnGray;
+      &:hover {
+        background-color: darken(@btnGray, 3%);
+      }
+      &:active {
+        background-color: darken(@btnGray, 10%);
+      }
+      // Cancel button should keep the same style
+      &:focus {
+        .box-shadow(rgba(197, 205, 211, 0.8) 0 0 2px, rgba(0, 0, 0, 0.0470588) 0 0 0 1px inset) !important;
+      }
+    }
+    // Removes selection outline in Firefox
+    &::-moz-focus-inner {
+      border: 0;
+    }
+  }
+}

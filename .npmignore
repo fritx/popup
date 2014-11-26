@@ -1,0 +1,7 @@
+*.log
+*.tgz
+bower_components
+test
+dist
+demo
+shots

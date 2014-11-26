@@ -1,0 +1,62 @@
+<!doctype html>
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="../dist/popup.css">
+<style>
+  body {
+    /*background-color: rgba(0, 0, 0, 0.05);*/
+    font-family: "微软雅黑";
+  }
+</style>
+
+<script src="../dist/jquery.min.js"></script>
+<script src="../dist/popup.js"></script>
+<script>
+  $(function(){
+    main()
+  })
+
+  function main(){
+    popup({
+      icon: 'warn',
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this imaginary file!',
+      okBtn: 'Yes, delete it!',
+      cancelBtn: 'No, cancel plx!'
+    }, function(ok){
+      if (ok) {
+        popup({
+          icon: 'success',
+          title: 'Deleted!',
+          text: 'Your imaginary file has been deleted!',
+          timeout: 3000
+        })
+      } else {
+        popup({
+          icon: 'info',
+          title: 'Cancelled',
+          text: 'Your imaginary file is safe :)',
+          timeout: 3000
+        })
+      }
+      setTimeout(function(){
+        popup({
+          icon: 'info',
+          title: 'Thanks!',
+          text: 'Thanks for your coming and welcome back!'
+        }, function(){
+          //popup({
+          //  image: 'thumbs-up.jpg',
+          //  title: 'Sweet!',
+          //  text: 'Here\'s a custom image.'
+          //})
+          popup({
+            icon: 'error',
+            title: 'Wow!',
+            text: 'Unluckily got the news database went exploded!',
+            hasOK: false
+          })
+        })
+      }, 3000)
+    })
+  }
+</script>
